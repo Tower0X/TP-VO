@@ -50,11 +50,18 @@ def render_heatmap_overlay(
         norm_map = density_map
         
     # Appliquer la colormap
+    import matplotlib
     try:
-        cmap = cm.get_cmap(colormap_name)
-    except ValueError:
-        cmap = cm.get_cmap("jet") # Fallback
-        
+        # Nouvelle API matplotlib (>= 3.7)
+        if hasattr(matplotlib, 'colormaps'):
+            cmap = matplotlib.colormaps.get_cmap(colormap_name)
+        else:
+            cmap = cm.get_cmap(colormap_name)
+    except Exception:
+        if hasattr(matplotlib, 'colormaps'):
+            cmap = matplotlib.colormaps.get_cmap("jet")
+        else:
+            cmap = cm.get_cmap("jet") # Fallback
     # cmap retourne RGBA (H, W, 4) dans [0, 1]
     heatmap_rgba = cmap(norm_map)
     heatmap_rgb = (heatmap_rgba[:, :, :3] * 255).astype(np.uint8)
