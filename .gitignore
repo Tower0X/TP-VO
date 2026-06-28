@@ -1,0 +1,23 @@
+# Dossiers de données (trop lourds pour Git)
+TRANCOS/
+train_data/
+test_data/
+data_root/
+
+# Fichiers de checkpoints lourds ou inutiles (on garde uniquement le best_csrnet.pth final)
+checkpoints/
+logs/
+outputs/
+csrnet_checkpoint.pth
+best_model.pth
+
+# Fichiers Python et système
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Environnements virtuels
+venv/
+env/
+.env/
